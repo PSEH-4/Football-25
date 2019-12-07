@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
-@RestController
+@RestController("/")
 class LeagueProbeResource {
 
     companion object {
@@ -18,10 +18,11 @@ class LeagueProbeResource {
     private lateinit var leagueProbeService: LeagueProbeService
 
 
+    // Todo: All the exceptions to be caught by a custom handler and converted to proper response codes
     @GetMapping("/standing")
-    fun getLeagueStanding(@RequestParam("countryName") countryName: String,
-                          @RequestParam("leagueName") leagueName: String,
-                          @RequestParam("teamName") teamName: String) =
+    fun getLeagueStanding(@RequestParam("country_name") countryName: String,
+                          @RequestParam("league_name") leagueName: String,
+                          @RequestParam("team_name") teamName: String) =
             leagueProbeService.getLeagueStanding(countryName, leagueName, teamName)
 
 }

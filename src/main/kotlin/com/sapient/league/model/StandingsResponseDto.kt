@@ -4,11 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 class StandingsResponseDto (
-        var countryId: String? = "",
-        var countryName: String? = "",
-        var leagueId: String? = "",
-        var leageName: String? = "",
-        var teamId: String? = "",
-        var teamName: String? = "",
+        var country_id: String? = "",
+        var country_name: String? = "",
+        var league_id: String? = "",
+        var league_name: String? = "",
+        var team_id: String? = "",
+        var team_name: String? = "",
         var overallLeaguePosition: String? = ""
 )

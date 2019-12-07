@@ -1,7 +1,6 @@
 package com.sapient.league.service
 
 import com.sapient.league.model.LeagueStandingDto
-import com.sapient.league.model.StandingsResponseDto
 import com.sapient.league.proxy.APIFootball
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -25,22 +24,22 @@ class LeagueProbeService {
         log.info("Trying to get league standings for $countryName : $leagueName : $teamName")
 
         val countries = apiFootball.getData(GET_COUNTRIES_ACTION, APIkey)
-        val country = countries.filter { it.countryName == countryName}
+        val country = countries.filter { it.country_name?.toLowerCase() == countryName.toLowerCase()}
 
         if (country.isNullOrEmpty()) throw Exception("$countryName records are not present")
 
-        var leagues = apiFootball.getData(GET_LEAGUES_ACTION, APIkey, countryId = country[0].countryId)
-        val league = leagues.filter { it.leageName == leagueName }
+        var leagues = apiFootball.getData(GET_LEAGUES_ACTION, APIkey, countryId = country[0].country_id)
+        val league = leagues.filter { it.league_name?.toLowerCase() == leagueName.toLowerCase() }
 
         if (league.isNullOrEmpty()) throw Exception("$leagueName records are not present")
 
-        val standings = apiFootball.getData(GET_STANDINGS_ACTION, APIkey, leagueId = league[0].leagueId)
-        val standing = standings.filter{ it.teamName == teamName}
+        val standings = apiFootball.getData(GET_STANDINGS_ACTION, APIkey, leagueId = league[0].league_id)
+        val standing = standings.filter{ it.team_name?.toLowerCase() == teamName.toLowerCase()}
 
         if (standing.isNullOrEmpty()) throw Exception("$leagueName does not have a standing")
 
-        return LeagueStandingDto(standing[0].countryId!!, standing[0].countryName!!, standing[0].leagueId!!,
-                standing[0].leageName!!, standing[0].teamId!!,
-                standing[0].teamName!!, standing[0].overallLeaguePosition!!)
+        return LeagueStandingDto(standing[0].country_id!!, standing[0].country_name!!, standing[0].league_id!!,
+                standing[0].league_name!!, standing[0].team_id!!,
+                standing[0].team_name!!, standing[0].overallLeaguePosition!!)
     }
 }
