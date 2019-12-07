@@ -10,5 +10,5 @@ class StandingsResponseDto (
         var league_name: String? = "",
         var team_id: String? = "",
         var team_name: String? = "",
-        var overallLeaguePosition: String? = ""
+        var overall_league_position: String? = ""
 )

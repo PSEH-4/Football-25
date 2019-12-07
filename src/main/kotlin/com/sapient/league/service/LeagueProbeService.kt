@@ -40,6 +40,6 @@ class LeagueProbeService {
 
         return LeagueStandingDto(standing[0].country_id!!, standing[0].country_name!!, standing[0].league_id!!,
                 standing[0].league_name!!, standing[0].team_id!!,
-                standing[0].team_name!!, standing[0].overallLeaguePosition!!)
+                standing[0].team_name!!, standing[0].overall_league_position!!)
     }
 }
